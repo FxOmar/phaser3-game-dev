@@ -6,8 +6,6 @@ export class Player extends Phaser.GameObjects.Sprite {
 
     scene.physics.add.existing(this);
 
-    // (this.body as Phaser.Physics.Arcade.Body).setCollideWorldBounds(true);
-
     this.anims.create({
       key: 'idle',
       frames: this.anims.generateFrameNumbers('bunny-idle', {

@@ -17,7 +17,7 @@ export class Game extends Scene {
 
     const tileset = map.addTilesetImage('tuxmon-sample-32px-extruded', 'tiles');
 
-    // const belowLayer = map.createLayer('Below Player', tileset, 0, 0);
+    map.createLayer('Below Player', tileset as Phaser.Tilemaps.Tileset, 0, 0);
     const worldLayer = map.createLayer(
       'World',
       tileset as Phaser.Tilemaps.Tileset,
