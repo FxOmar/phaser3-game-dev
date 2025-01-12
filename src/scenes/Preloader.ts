@@ -23,14 +23,55 @@ export class Preloader extends Scene {
     //  Load the assets for the game - Replace with your own assets
     this.load.setPath('assets');
 
-    this.load.image('sky', 'sky.png');
-    this.load.image('ground', 'platform.png');
-    this.load.image('star', 'star.png');
-    this.load.image('bomb', 'bomb.png');
-    this.load.spritesheet('dude', 'dude.png', {
+    this.load.image(
+      'tiles',
+      'https://mikewesthad.github.io/phaser-3-tilemap-blog-posts/post-1/assets/tilesets/tuxmon-sample-32px-extruded.png'
+    );
+    this.load.tilemapTiledJSON(
+      'map',
+      'https://mikewesthad.github.io/phaser-3-tilemap-blog-posts/post-1/assets/tilemaps/tuxemon-town.json'
+    );
+
+    this.load.spritesheet('bunny-idle', 'BrownBunny_Idle/BunnyIdleF.png', {
       frameWidth: 32,
-      frameHeight: 48,
+      frameHeight: 32,
     });
+
+    this.load.spritesheet(
+      'bunny-front',
+      'BrownBunny_Idle/BunnyWalk-Sheet.png',
+      {
+        frameWidth: 32,
+        frameHeight: 32,
+      }
+    );
+
+    this.load.spritesheet(
+      'bunny-back',
+      'BrownBunny_Idle/BunnyWalkBack-Sheet.png',
+      {
+        frameWidth: 32,
+        frameHeight: 32,
+      }
+    );
+
+    this.load.spritesheet(
+      'bunny-left',
+      'BrownBunny_Idle/BunnyWalkSide2-Sheet.png',
+      {
+        frameWidth: 32,
+        frameHeight: 32,
+      }
+    );
+
+    this.load.spritesheet(
+      'bunny-right',
+      'BrownBunny_Idle/BunnyWalkSide-Sheet.png',
+      {
+        frameWidth: 32,
+        frameHeight: 32,
+      }
+    );
   }
 
   create() {
