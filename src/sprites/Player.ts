@@ -1,6 +1,6 @@
 export class Player extends Phaser.GameObjects.Sprite {
   constructor(scene: Phaser.Scene, x: number, y: number) {
-    super(scene, x, y, 'bunny-idle');
+    super(scene, x, y, 'bunny-front');
 
     scene.add.existing(this);
 
@@ -62,9 +62,9 @@ export class Player extends Phaser.GameObjects.Sprite {
 
   update(...args: any[]): void {
     const cursors = this.scene.input.keyboard?.createCursorKeys();
-    const speed = 160;
-
     const PLAYER_BODY = this.body as Phaser.Physics.Arcade.Body;
+    const speed = 160;
+    const prevVelocity = PLAYER_BODY.velocity.clone();
 
     PLAYER_BODY.setVelocity(0);
 
@@ -95,7 +95,18 @@ export class Player extends Phaser.GameObjects.Sprite {
       !cursors?.left.isDown &&
       !cursors?.right.isDown
     ) {
-      this.anims.play('idle', true);
+      // this.anims.play('idle', true);
+      this.anims.stop();
+
+      if (prevVelocity.x < 0) {
+        this.setTexture('bunny-left');
+      } else if (prevVelocity.x > 0) {
+        this.setTexture('bunny-right');
+      } else if (prevVelocity.y < 0) {
+        this.setTexture('bunny-back');
+      } else if (prevVelocity.y > 0) {
+        this.setTexture('bunny-front');
+      }
     }
   }
 }

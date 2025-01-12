@@ -46,9 +46,8 @@ export class Game extends Scene {
       typeof spawnPoint.y === 'number'
     ) {
       this.Player = new Player(this, spawnPoint.x, spawnPoint.y);
-    } else {
-      throw new Error('Spawn Point not found or invalid');
     }
+
     this.Player.setScale(1.5);
 
     this.Player.setDisplayOrigin(8, 10);
