@@ -60,7 +60,7 @@ export class Player extends Phaser.GameObjects.Sprite {
     });
   }
 
-  update(...args: any[]): void {
+  update(time: number, delta: number): void {
     const cursors = this.scene.input.keyboard?.createCursorKeys();
     const PLAYER_BODY = this.body as Phaser.Physics.Arcade.Body;
     const speed = 160;
@@ -71,42 +71,34 @@ export class Player extends Phaser.GameObjects.Sprite {
     // Horizontal Movement
     if (cursors?.left.isDown) {
       PLAYER_BODY.setVelocityX(-speed);
-      this.anims.play('left', true);
     } else if (cursors?.right.isDown) {
       PLAYER_BODY.setVelocityX(speed);
-      this.anims.play('right', true);
     }
-
-    PLAYER_BODY.velocity.normalize().scale(speed);
 
     // Vertical Movement
     if (cursors?.up.isDown) {
       PLAYER_BODY.setVelocityY(-speed);
-      this.anims.play('up', true);
     } else if (cursors?.down.isDown) {
       PLAYER_BODY.setVelocityY(80);
-      this.anims.play('down', true);
     }
 
-    // Idle
-    if (
-      !cursors?.up.isDown &&
-      !cursors?.down.isDown &&
-      !cursors?.left.isDown &&
-      !cursors?.right.isDown
-    ) {
-      // this.anims.play('idle', true);
+    PLAYER_BODY.velocity.normalize().scale(speed);
+
+    if (cursors?.left.isDown) {
+      this.anims.play('left', true);
+    } else if (cursors?.right.isDown) {
+      this.anims.play('right', true);
+    } else if (cursors?.up.isDown) {
+      this.anims.play('up', true);
+    } else if (cursors?.down.isDown) {
+      this.anims.play('down', true);
+    } else {
       this.anims.stop();
 
-      if (prevVelocity.x < 0) {
-        this.setTexture('bunny-left');
-      } else if (prevVelocity.x > 0) {
-        this.setTexture('bunny-right');
-      } else if (prevVelocity.y < 0) {
-        this.setTexture('bunny-back');
-      } else if (prevVelocity.y > 0) {
-        this.setTexture('bunny-front');
-      }
+      if (prevVelocity.x < 0) this.setTexture('bunny-left');
+      else if (prevVelocity.x > 0) this.setTexture('bunny-right');
+      else if (prevVelocity.y < 0) this.setTexture('bunny-back');
+      else if (prevVelocity.y > 0) this.setTexture('bunny-front');
     }
   }
 }
